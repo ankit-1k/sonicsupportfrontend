@@ -1,0 +1,155 @@
+[
+  {
+    "section": "IMPORTANT FOR INTERVIEW",
+    "questions": [
+      {
+        "question": "What is useState() in React?",
+        "answer": "The useState() is a built-in React Hook that allows you for having state variables in functional components. It should be used when the DOM has something that is dynamically manipulating/controlling."
+      },
+      {
+        "question": "What are keys in React?",
+        "answer": "A key is a special string attribute that needs to be included when using lists of elements."
+      },
+      {
+        "question": "What is JSX?",
+        "answer": "JSX stands for JavaScript XML. It allows us to write HTML inside JavaScript and place them in the DOM without using functions like appendChild( ) or createElement( )."
+      },
+      {
+        "question": "What are the differences between functional and class components?",
+        "answer": "Functional components are simpler, using functions to return JSX. They don't have state or lifecycle methods until React 16.8 introduced Hooks, enabling state and lifecycle functionalities in functional components. Class components use ES6 classes, have state and lifecycle methods, and are typically more verbose than functional components."
+      },
+      {
+        "question": "What are the differences between controlled and uncontrolled components?",
+        "answer": "Controlled components have their state controlled by React, using state variables and event handlers. They are controlled by the React component, allowing for easier manipulation and validation of data. Uncontrolled components, on the other hand, manage their state internally without direct React control, relying more on DOM manipulation."
+      },
+      {
+        "question": "What are props in React?",
+        "answer": "Props (short for properties) are used to pass data from parent to child components in React. They are read-only and help in making components reusable by allowing customization. Props are typically used to send information like strings, numbers, functions, or objects from a parent component to its child components."
+      },
+      {
+        "question": "What is prop drilling in React?",
+        "answer": "Prop drilling refers to the process of passing props from a parent component down through multiple levels of child components, even if intermediate components don't directly use those props. This can lead to code verbosity and reduced maintainability. Context API or Redux can help avoid excessive prop drilling by providing a centralized state management solution."
+      },
+      {
+        "question": "What are error boundaries?",
+        "answer": "Error boundaries are React components that catch JavaScript errors during rendering, in lifecycle methods, and in constructors of the whole component tree below them. They help prevent the entire UI from crashing due to a single component's error. Error boundaries display fallback UI and log the error for debugging."
+      },
+      {
+        "question": "What is React Hooks?",
+        "answer": "React Hooks are functions that let you use state and other React features in functional components without writing a class. They were introduced in React 16.8 to provide a more concise and readable way to manage state, side effects, and other React features in functional components."
+      },
+      {
+        "question": "What are the rules that must be followed while using React Hooks?",
+        "answer": "Follow React Hooks rules: use them in functional components or custom Hooks, not regular functions; call them consistently in the same order on every render; prefix custom Hooks with 'use' for clarity; avoid conditional useState calls."
+      },
+      {
+        "question": "What is the use of useEffect React Hooks?",
+        "answer": "The useEffect hook in React is used for performing side effects in functional components. It replaces lifecycle methods like componentDidMount, componentDidUpdate, and componentWillUnmount. useEffect runs after every render and can be used for tasks like data fetching, DOM manipulation, or subscribing to events."
+      },
+      {
+        "question": "Why do React Hooks make use of refs?",
+        "answer": "React Hooks utilize refs for managing focus, imperative DOM operations, state persistence, and interfacing with third-party libraries. Refs allow direct access to DOM elements, facilitating tasks like measuring dimensions, triggering animations, or integrating with libraries that require imperative APIs, enhancing control and functionality in functional components."
+      },
+      {
+        "question": "What are Custom Hooks?",
+        "answer": "Custom Hooks in React are reusable JavaScript functions that contain logic and state management specific to a component or a set of related components. They enable code reuse and abstraction of complex logic, allowing developers to encapsulate common patterns and share functionality across different parts of their application."
+      },
+      {
+        "question": "Explain Strict Mode in React.",
+        "answer": "Strict Mode in React is a development tool that enables additional checks and warnings for potential issues in your code. It helps identify and address common mistakes or unsafe practices, promoting cleaner and more reliable code. Strict Mode highlights deprecated features, identifies unsafe lifecycle methods, and enforces stricter component rendering behavior, improving code quality and debugging capabilities."
+      },
+      {
+        "question": "How to prevent re-renders in React?",
+        "answer": "To prevent re-renders in React, memoize components with `React.memo` or use `PureComponent`/`shouldComponentUpdate` for class components. Optimize state updates using functional `useState` updates. Memoize event handlers and computed values with `useCallback` and `useMemo`. Efficiently manage context providers and consumers. Split large components, optimize rendering conditions, and use keys in lists. These strategies collectively minimize unnecessary re-renders and enhance application performance."
+      },
+      {
+        "question": "What are the different ways to style a React component?",
+        "answer": "You can style React components using inline styles with the `style` attribute, external CSS files imported into components, CSS Modules for scoped styles, styled-components for CSS-in-JS with dynamic styles, or other CSS-in-JS libraries like Emotion or JSS, offering varied approaches based on project needs and developer preferences."
+      },
+      {
+        "question": "React Router is a popular routing library for React applications. Can you explain its functionality?",
+        "answer": "React Router allows developers to add routing functionality, enabling navigation between different components or pages in a React application. It provides declarative routing using components like BrowserRouter, Route, Switch, and Link. React Router manages URL changes, history navigation, and rendering of components based on the current URL, enhancing the user experience and enabling single-page application (SPA) development in React."
+      },
+      {
+        "question": "Can React Hook replace Redux?",
+        "answer": "React Hooks can replace Redux for simpler state management within components using `useState` and `useReducer`. However, Redux is more suitable for complex global state, asynchronous actions, and middleware integration. Combining Hooks for local state and Redux for global state is a common practice for scalable state management in React applications."
+      },
+      {
+        "question": "Explain conditional rendering in React.",
+        "answer": "Conditional rendering in React involves displaying different content or components based on certain conditions. This can be achieved using JavaScript expressions within JSX or conditional rendering techniques like ternary operators, if statements, or logical && operators. For example, `{isLoggedIn ? <UserComponent /> : <LoginComponent />}` renders different components based on the `isLoggedIn` state. Dynamic rendering allows creating more interactive and personalized user interfaces in React applications."
+      },
+      {
+        "question": "What are some of the predefined functions in Redux?",
+        "answer": "Redux provides several predefined functions for managing state and store operations:- createStore: A function used to create a Redux store, which holds the application's state tree.- combineReducers: A utility function used to combine multiple reducer functions into a single reducer, typically for managing different slices of state.- applyMiddleware: A function used to apply middleware to the Redux store, enhancing its capabilities such as handling asynchronous actions or logging.- dispatch: A method used to dispatch actions to the Redux store, triggering state updates.- getState: A method used to access the current state of the Redux store.- subscribe: A method used to subscribe to changes in the Redux store, allowing components to react to state updates."
+      }
+    ]
+  },
+  {
+    "section": "HTML",
+    "questions": [
+      {
+        "question": "What does HTML stand for?",
+        "answer": "HTML stands for HyperText Markup Language."
+      },
+      {
+        "question": "What is the purpose of the <div> element in HTML?",
+        "answer": "The <div> element is a block-level container typically used to group HTML elements together."
+      },
+      {
+        "question": "Explain the difference between <div> and <span>.",
+        "answer": "The <div> element is a block-level container, while the <span> element is an inline-level container."
+      }
+    ]
+  },
+  {
+    "section": "CSS",
+    "questions": [
+      {
+        "question": "What is CSS used for in web development?",
+        "answer": "CSS is used for styling the appearance of HTML elements on web pages."
+      },
+      {
+        "question": "Explain the difference between padding and margin in CSS.",
+        "answer": "Padding is the space inside the border of an element, while margin is the space outside the border."
+      },
+      {
+        "question": "What is a CSS selector? Provide examples.",
+        "answer": "A CSS selector targets specific HTML elements to apply styling. Examples: class (.class), ID (#id), element (element)."
+      }
+    ]
+  },
+  {
+    "section": "JavaScript",
+    "questions": [
+      {
+        "question": "What is JavaScript and its role in web development?",
+        "answer": "JavaScript is a scripting language used for adding interactivity and behavior to web pages."
+      },
+      {
+        "question": "Explain the difference between == and === in JavaScript.",
+        "answer": "== is a loose equality comparison, === is strict equality comparison, checking both value and type."
+      },
+      {
+        "question": "What is a closure in JavaScript? Provide an example.",
+        "answer": "A closure is a function that retains access to variables from its parent scope even after the parent function has finished executing. Example: function outer() { var x = 10; function inner() { return x; } return inner; } var closure = outer(); console.log(closure());"
+      }
+    ]
+  },
+  {
+    "section": "React",
+    "questions": [
+      {
+        "question": "What is React and its main features?",
+        "answer": "React is a JavaScript library for building user interfaces, known for its component-based architecture, virtual DOM, and declarative syntax."
+      },
+      {
+        "question": "Explain the concept of Virtual DOM in React.",
+        "answer": "Virtual DOM is a lightweight copy of the actual DOM, used by React to efficiently update the UI by comparing changes before making updates to the real DOM."
+      },
+      {
+        "question": "What are React hooks? Provide examples of their usage.",
+        "answer": "React hooks are functions that enable developers to use state and other React features in functional components. Examples: useState(), useEffect()."
+      }
+    ]
+  }
+]

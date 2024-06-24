@@ -1,0 +1,48 @@
+.button {
+  padding: 10px 17px;
+  font-size: 15px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: #fff;
+  background-color: #002922;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 3px #999;
+}
+
+.button:hover {
+  background-color: #011f1a;
+}
+
+.button:active {
+  background-color: #011f1a;
+  box-shadow: 0 0px #666;
+  transform: translateY(4px);
+}
+
+.right-0{
+  right: 0px;
+}
+
+.top-icon svg {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  color: rgb(5, 255, 30);
+  height: 30px;
+  width: 30px;
+  animation: bounce-top 1.5s infinite;
+  animation-direction: alternate;
+}
+@keyframes bounce-top {
+  0% {
+      transform: translateY(0);
+  }
+  /* 50% {
+      transform: translateY(-10px);
+  } */
+  100% {
+      transform: translateY(-6px);
+  }
+}

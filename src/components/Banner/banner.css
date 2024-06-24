@@ -1,0 +1,80 @@
+.lg-text{
+    font-size: 50px;
+}
+.banner-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: black;
+    height: 100vh;
+}
+.image-container {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.banner-image {
+    max-width: 100%;
+    height: auto;
+    animation: bounce 2s infinite alternate;
+    /* Add the bounce animation */
+}
+
+@keyframes bounce {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(-10px);
+        /* Adjust the bounce distance as needed */
+    }
+}
+
+.text-container {
+    flex: 2;
+    /* Adjust flex ratio as needed */
+    color: white;
+    text-align: left;
+}
+
+@keyframes colorChange {
+    0% {
+        background-position: 100% 0;
+    }
+
+    100% {
+        background-position: 0 0;
+    }
+}
+
+.brand-name {
+    background-image: linear-gradient(to right, #ff0000, #00ff00, #0000ff);
+    background-size: 200% 100%;
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    /* For Safari */
+    animation: colorChange 5s infinite alternate linear;
+}
+/* button animatd */
+
+/* Media query for responsiveness */
+@media (max-width: 768px) {
+    .banner-container {
+        flex-direction: column;
+    }
+
+    .image-container,
+    .text-container {
+        margin: 0;
+        width: 100%;
+    }
+}
+@media (max-width:460px) {
+    .lg-text{
+        font-size: 30px;
+    }
+}

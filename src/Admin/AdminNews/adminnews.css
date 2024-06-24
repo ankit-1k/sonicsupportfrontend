@@ -1,0 +1,114 @@
+/* adminnews.css */
+
+/* Add styles for the form */
+.form-upload-news {
+    position: relative;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    overflow: hidden;
+}
+
+/* SVG Icon styling */
+.double-right-icon-custom {
+    height: 30px;
+    width: 30px;
+    font-weight: bold;
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    animation: rightBounce 2s infinite;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+}
+
+@keyframes rightBounce {
+
+    0%,
+    100% {
+        transform: translateY(-50%) translateX(0);
+    }
+
+    50% {
+        transform: translateY(-50%) translateX(10px);
+    }
+}
+
+.slider-content {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    /* Start hidden off-screen to the left */
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.5s ease-in-out;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Add a class to show the slider content */
+.slider-content.open {
+    transform: translateX(100%);
+}
+
+.left-arrow-custom {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+}
+
+.left-arrow-custom svg {
+    transform: translateY(-50%);
+    animation: leftBounce 2s infinite;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+}
+
+@keyframes leftBounce {
+
+    0%,
+    100% {
+        transform: translateY(-50%) translateX(0);
+    }
+
+    50% {
+        transform: translateY(-50%) translateX(10px);
+    }
+}
+
+.rotated {
+    transform: translateY(-50%) rotate(90deg);
+}
+
+.card-news-container {
+    max-height: 400px;
+    overflow-y: auto;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.card-news-api {
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    height: 320px;
+}
+
+
+/* Media query for small screens */
+@media (max-width: 767px) {
+    .double-right-icon-custom {
+        top: -100px;
+    }
+}
+
+/* Transition for slider content */
+.slider-container {
+    position: relative;
+}

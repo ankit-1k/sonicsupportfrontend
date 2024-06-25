@@ -15,7 +15,7 @@ const Login = ({ setIsAuthenticated }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post('https://sonicsupportbackend-b5hcrha8x-ankits-projects-1030ff5d.vercel.app/login', {
+      const response = await axios.post('http://localhost:4000/login', {
         email,
         password,
       });

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter, Routes, Route} from 'react-router-dom';
 import Landingpage from './components/Landingpage/Landingpage';
 // import Navbar from './components/Navbar/Navbar';
 import News from './components/News/News';
@@ -16,7 +16,7 @@ import AdminProjects from './Admin/AdminProjects/AdminProjects'
 import AdminContacts from './Admin/AdminContacts/AdminContacts'
 import AdminAboutus from './Admin/AdminAboutus/AdminAboutus'
 const App = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  // const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const handleScrollToTop = () => {
     window.scrollTo({
@@ -28,7 +28,6 @@ const App = () => {
   return (
     <>
       <BrowserRouter>
-        {/* <Navbar /> */}
         <div>
           <Routes>
             <Route path="/" element={<Landingpage />} />
@@ -37,13 +36,13 @@ const App = () => {
             <Route path="/contact" element={<Contact />} />
             <Route path="/aboutus" element={<Aboutus />} />
             <Route path="/notes" element={<Notes />} />
-            <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
-            <Route path="/admin" element={isAuthenticated ? <Admin /> : <Navigate to="/login" />} />
-            <Route path="/editnotes" element={isAuthenticated ? <AdminNotes /> : <Navigate to="/login" />} />
-            <Route path="/editnews" element={isAuthenticated ? <AdminNews /> : <Navigate to="/login" />} />
-            <Route path="/adminprojects" element={isAuthenticated ? <AdminProjects /> : <Navigate to="/login" />} />
-            <Route path="/admincontacts" element={isAuthenticated ? <AdminContacts /> : <Navigate to="/login" />} />
-            <Route path="/adminaboutus" element={isAuthenticated ? <AdminAboutus /> : <Navigate to="/login" />} />
+            <Route path="/login" element={<Login/>} />
+            <Route path="/admin" element={<Admin/>}/>
+            <Route path="/editnotes" element={<AdminNotes/>}/>
+            <Route path="/editnews" element={<AdminNews/>}/>
+            <Route path="/adminprojects" element={<AdminProjects/>}/>
+            <Route path="/admincontacts" element={<AdminContacts/>}/>
+            <Route path="/adminaboutus" element={<AdminAboutus/>}/>
           </Routes>
         </div>
       </BrowserRouter>

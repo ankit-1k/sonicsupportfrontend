@@ -14,7 +14,7 @@ const News = () => {
     };
     const fetchNews = async () => {
         try {
-            const response = await axios.get('http://localhost:4000/api/news');
+            const response = await axios.get('https://sonicsupportbackend-btyni57t3-ankits-projects-1030ff5d.vercel.app/api/news');
             setNews(response.data);
         } catch (error) {
             console.error('There was an error fetching the news items:', error);

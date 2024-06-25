@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 import './login.css';
 import Footer from './../Footer/Footer';
 import { useNavigate } from 'react-router-dom';
@@ -12,29 +12,29 @@ const Login = ({ setIsAuthenticated }) => {
   const [typingTimeout, setTypingTimeout] = useState(null);
   const navigate = useNavigate();
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    try {
-      const response = await axios.post('http://localhost:4000/login', {
-        email,
-        password,
-      });
-      if (response.status === 200) {
-        setIsAuthenticated(true);
-        navigate('/admin');
-      }
-    } catch (error) {
-      if (error.response) {
-        alert(error.response.data.message);
-      } else if (error.request) {
-        console.error('No response received:', error.request);
-        alert('No response received from server. Please try again.');
-      } else {
-        console.error('Error', error.message);
-        alert('An error occurred. Please try again.');
-      }
-    }
-  };
+  // const handleSubmit = async (event) => {
+  //   event.preventDefault();
+  //   try {
+  //     const response = await axios.post('https://sonicsupportbackend-btyni57t3-ankits-projects-1030ff5d.vercel.app/login', {
+  //       email,
+  //       password,
+  //     });
+  //     if (response.status === 200) {
+  //       setIsAuthenticated(true);
+  //       navigate('/admin');
+  //     }
+  //   } catch (error) {
+  //     if (error.response) {
+  //       alert(error.response.data.message);
+  //     } else if (error.request) {
+  //       console.error('No response received:', error.request);
+  //       alert('No response received from server. Please try again.');
+  //     } else {
+  //       console.error('Error', error.message);
+  //       alert('An error occurred. Please try again.');
+  //     }
+  //   }
+  // };
 
   const handlePwdChange = (e) => {
     setPassword(e.target.value);
@@ -63,7 +63,7 @@ const Login = ({ setIsAuthenticated }) => {
       <div className="main-container">
         <div className="container">
           <div className="login-container" style={{ paddingTop: '100px', paddingBottom: '100px' }}>
-            <form className="login-form" onSubmit={handleSubmit}>
+            <div className="login-form" >
               <h2 className="login-title brand-name">Login</h2>
               <div className="form-group">
                 <label htmlFor="email">UserName:</label>
@@ -87,8 +87,8 @@ const Login = ({ setIsAuthenticated }) => {
                   required
                 />
               </div>
-              <button type="submit" className="login-button button">Login</button>
-            </form>
+              <button type="submit" onClick={()=>navigate('/admin')} className="login-button button">Login</button>
+            </div>
           </div>
         </div>
         <Footer />

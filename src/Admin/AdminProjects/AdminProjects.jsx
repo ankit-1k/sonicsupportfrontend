@@ -30,7 +30,7 @@ const AdminProjects = () => {
 
     if (projectName && projectLink && description) {
       try {
-        await axios.post('http://localhost:4000/api/projects', formData);
+        await axios.post('https://sonicsupportbackend-btyni57t3-ankits-projects-1030ff5d.vercel.app/api/projects', formData);
         setFormData({ projectName: '', projectLink: '', description: '' });
         fetchProjects();
         isUploadsuccess(true)
@@ -45,7 +45,7 @@ const AdminProjects = () => {
 
   const fetchProjects = async () => {
     try {
-      const response = await axios.get('http://localhost:4000/api/projects');
+      const response = await axios.get('https://sonicsupportbackend-btyni57t3-ankits-projects-1030ff5d.vercel.app/api/projects');
       setProjects(response.data);
     } catch (error) {
       console.error('Error fetching projects:', error.response);
@@ -54,7 +54,7 @@ const AdminProjects = () => {
 
   const handleDelete = async (projectId) => {
     try {
-      await axios.delete(`http://localhost:4000/api/projects/${projectId}`);
+      await axios.delete(`https://sonicsupportbackend-btyni57t3-ankits-projects-1030ff5d.vercel.app/api/projects/${projectId}`);
       alert('Project deleted successfully');
       fetchProjects(); // Refresh the project list after deletion
     } catch (error) {
@@ -71,7 +71,7 @@ const AdminProjects = () => {
 
   const handleEdit = async () => {
     try {
-      await axios.put(`http://localhost:4000/api/projects/${selectedProjectId}`, editFormData);
+      await axios.put(`https://sonicsupportbackend-btyni57t3-ankits-projects-1030ff5d.vercel.app/api/projects/${selectedProjectId}`, editFormData);
       alert('Project updated successfully');
       fetchProjects(); // Refresh the project list after update
     } catch (error) {
@@ -325,7 +325,7 @@ export default AdminProjects;
 
 //     if (projectName && projectLink && description) {
 //       try {
-//         await axios.post('http://localhost:4000/api/projects', formData);
+//         await axios.post('https://sonicsupportbackend-btyni57t3-ankits-projects-1030ff5d.vercel.app/api/projects', formData);
 //         setFormData({ projectName: '', projectLink: '', description: '' });
 //         fetchProjects();
 //         setIsUploadsuccess(true);
@@ -340,7 +340,7 @@ export default AdminProjects;
 
 //   const fetchProjects = async () => {
 //     try {
-//       const response = await axios.get('http://localhost:4000/api/projects');
+//       const response = await axios.get('https://sonicsupportbackend-btyni57t3-ankits-projects-1030ff5d.vercel.app/api/projects');
 //       setProjects(response.data);
 //     } catch (error) {
 //       console.error('Error fetching projects:', error.response);
@@ -349,7 +349,7 @@ export default AdminProjects;
 
 //   const handleDelete = async (projectId) => {
 //     try {
-//       await axios.delete(`http://localhost:4000/api/projects/${projectId}`);
+//       await axios.delete(`https://sonicsupportbackend-btyni57t3-ankits-projects-1030ff5d.vercel.app/api/projects/${projectId}`);
 //       alert('Project deleted successfully');
 //       fetchProjects(); // Refresh the project list after deletion
 //     } catch (error) {
@@ -366,7 +366,7 @@ export default AdminProjects;
 
 //   const handleEdit = async () => {
 //     try {
-//       await axios.put(`http://localhost:4000/api/projects/${selectedProjectId}`, editFormData);
+//       await axios.put(`https://sonicsupportbackend-btyni57t3-ankits-projects-1030ff5d.vercel.app/api/projects/${selectedProjectId}`, editFormData);
 //       alert('Project updated successfully');
 //       fetchProjects(); // Refresh the project list after update
 //     } catch (error) {

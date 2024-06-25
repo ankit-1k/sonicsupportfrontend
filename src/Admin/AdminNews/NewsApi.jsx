@@ -9,7 +9,7 @@ const NewsApi = ({ onEdit }) => {
 
     const fetchNews = async () => {
         try {
-            const response = await axios.get('https://sonicsupportbackend-btyni57t3-ankits-projects-1030ff5d.vercel.app/api/news');
+            const response = await axios.get('https://sonicsupportbackend-lbz5o7nqn-ankits-projects-1030ff5d.vercel.app//api/news');
             setNews(response.data);
         } catch (error) {
             console.error('There was an error fetching the news items:', error);
@@ -18,7 +18,7 @@ const NewsApi = ({ onEdit }) => {
 
     const handleDelete = async (id) => {
         try {
-            await axios.delete(`https://sonicsupportbackend-btyni57t3-ankits-projects-1030ff5d.vercel.app/api/news/${id}`);
+            await axios.delete(`https://sonicsupportbackend-lbz5o7nqn-ankits-projects-1030ff5d.vercel.app//api/news/${id}`);
             fetchNews();
         } catch (error) {
             console.error('There was an error deleting the news item:', error);

@@ -9,7 +9,7 @@ In the project directory, you can run:
 ### `npm start`
 
 Runs the app in the development mode.\
-Open [https://sonicsupportbackend-btyni57t3-ankits-projects-1030ff5d.vercel.app](https://sonicsupportbackend-btyni57t3-ankits-projects-1030ff5d.vercel.app) to view it in your browser.
+Open [https://sonicsupportbackend-lbz5o7nqn-ankits-projects-1030ff5d.vercel.app/](https://sonicsupportbackend-lbz5o7nqn-ankits-projects-1030ff5d.vercel.app/) to view it in your browser.
 
 The page will reload when you make changes.\
 You may also see any lint errors in the console.

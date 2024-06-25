@@ -18,7 +18,7 @@ const Upload = () => {
         }
 
         try {
-            const response = await axios.post('https://sonicsupportbackend-btyni57t3-ankits-projects-1030ff5d.vercel.app/upload', { subject, question, answer });
+            const response = await axios.post('https://sonicsupportbackend-lbz5o7nqn-ankits-projects-1030ff5d.vercel.app//upload', { subject, question, answer });
             console.log(response.data);
             setIsOpensuccess(true)
             // Optionally, clear the form fields after successful submission

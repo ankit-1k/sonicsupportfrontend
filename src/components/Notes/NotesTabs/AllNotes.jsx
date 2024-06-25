@@ -11,7 +11,7 @@ const AllNotes = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('https://sonicsupportbackend-wi4x.vercel.app/questions');
+                const response = await axios.get('https://sonicsupportbackend-b5hcrha8x-ankits-projects-1030ff5d.vercel.app/questions');
                 setAllNotesData(response.data);
                 setLoading(false);
             } catch (error) {
@@ -100,7 +100,7 @@ export default AllNotes;
 //     useEffect(() => {
 //         const fetchData = async () => {
 //             try {
-//                 const response = await axios.get('https://sonicsupportbackend-wi4x.vercel.app/questions');
+//                 const response = await axios.get('https://sonicsupportbackend-b5hcrha8x-ankits-projects-1030ff5d.vercel.app/questions');
 //                 setAllNotesData(response.data);
 //                 setLoading(false);
 //             } catch (error) {

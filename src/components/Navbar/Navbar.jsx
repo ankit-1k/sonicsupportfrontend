@@ -111,6 +111,7 @@ const MobileMenu = () => {
             <i onClick={handleProject}>Projects</i>
             <i onClick={handleContact}>Contact</i>
             <i onClick={handleAbout}>About</i>
+            <i onClick={()=>navigate('/login')}>Login</i>
         </div>
     );
 };

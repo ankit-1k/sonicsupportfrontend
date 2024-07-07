@@ -106,7 +106,7 @@ const MobileMenu = () => {
     }
     return (
         <div className={'mobile-menu'}>
-            <i>Home</i>
+            <i onClick={()=>navigate('/')}>Home</i>
             <i onClick={handleNews}>News</i>
             <i onClick={handleProject}>Projects</i>
             <i onClick={handleContact}>Contact</i>

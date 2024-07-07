@@ -1,36 +1,28 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './projects.css'
 import Banner from '../Banner/Banner';
 import Footer from '../Footer/Footer';
 import Navbar from '../Navbar/Navbar';
+import axios from 'axios';
 const Projects = () => {
-    const projectJson = [
-        {
-            id: '1',
-            name: 'SonicPortfolios',
-            txt: 'Developed a voice-command-operated website enabling communication with a bot for streamlined interaction and user engagement.',
-            link: 'https://ankit5116k.netlify.app/'
-        },
-        {
-            id: '2',
-            name: 'HYDPG',
-            txt: 'Developed React platform for Hyderabad PG search, dynamic components, efficient data management.',
-            link: 'https://hydpg.netlify.app/'
-        },
-        {
-            id: '3',
-            name: 'SIIM',
-            txt: 'Created responsive college website template: HTML, CSS, JavaScript. Clean design, device-friendly.',
-            link: 'https://ankit-1k.github.io/SIIM/'
-        },
-        {
-            id: '4',
-            name: 'FilmFlix',
-            txt: 'Debuted FilmFlix: dynamic site for Bollywood, Hollywood, and Tollywood films; user-friendly for easy browsing and updated selections.',
-            link: 'https://ankit-1k.github.io/movie-website/'
-        }
-    ];
+    const [projectApi, setProjectApi] = useState([]);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('https://sonicsupportbackend-uarr.vercel.app/api/projects');
+        setProjectApi(response.data);
+        console.log(response.data); 
+      } catch (error) {
+        console.error('Error fetching projects:', error);
+      }
+    };
+
+    fetchData(); 
+
+  }, []); 
+
+  console.log(projectApi); 
     return (
         <div>
             <Navbar />
@@ -41,17 +33,17 @@ const Projects = () => {
             </div>
             <div className="project-container">
                 {
-                    projectJson.map((item, index) => (
+                    projectApi.map((item, index) => (
                         <div className="project-card">
                             <div className="face face1">
                                 <div className="content">
-                                    <h3>{item.name}</h3>
+                                    <h3>{item.projectName}</h3>
                                 </div>
                             </div>
                             <div className="face face2">
                                 <div className="content">
-                                    <p>{item.txt}</p>
-                                    <a href={item.link}>View Project</a>
+                                    <p>{item.description}</p>
+                                    <a href={item.projectLink}>View Project</a>
                                 </div>
                             </div>
                         </div>

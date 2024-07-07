@@ -27,11 +27,11 @@ const News = () => {
     e.preventDefault();
     try {
       if (editMode) {
-        await axios.put(`https://sonicsupportbackend-lbz5o7nqn-ankits-projects-1030ff5d.vercel.app//api/news/${editId}`, formData);
+        await axios.put(`https://sonicsupportbackend-uarr.vercel.app/api/news/${editId}`, formData);
         setEditMode(false);
         setEditId(null);
       } else {
-        await axios.post('https://sonicsupportbackend-lbz5o7nqn-ankits-projects-1030ff5d.vercel.app//api/news', formData);
+        await axios.post('https://sonicsupportbackend-uarr.vercel.app/api/news', formData);
       }
       setFormData({
         title: '',

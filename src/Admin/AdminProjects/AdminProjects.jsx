@@ -30,7 +30,7 @@ const AdminProjects = () => {
 
     if (projectName && projectLink && description) {
       try {
-        await axios.post('https://sonicsupportbackend-lbz5o7nqn-ankits-projects-1030ff5d.vercel.app//api/projects', formData);
+        await axios.post('https://sonicsupportbackend-uarr.vercel.app/api/projects', formData);
         setFormData({ projectName: '', projectLink: '', description: '' });
         fetchProjects();
         isUploadsuccess(true)
@@ -45,7 +45,7 @@ const AdminProjects = () => {
 
   const fetchProjects = async () => {
     try {
-      const response = await axios.get('https://sonicsupportbackend-lbz5o7nqn-ankits-projects-1030ff5d.vercel.app//api/projects');
+      const response = await axios.get('https://sonicsupportbackend-uarr.vercel.app/api/projects');
       setProjects(response.data);
     } catch (error) {
       console.error('Error fetching projects:', error.response);
@@ -54,7 +54,7 @@ const AdminProjects = () => {
 
   const handleDelete = async (projectId) => {
     try {
-      await axios.delete(`https://sonicsupportbackend-lbz5o7nqn-ankits-projects-1030ff5d.vercel.app//api/projects/${projectId}`);
+      await axios.delete(`https://sonicsupportbackend-uarr.vercel.app/api/projects/${projectId}`);
       alert('Project deleted successfully');
       fetchProjects(); // Refresh the project list after deletion
     } catch (error) {
@@ -71,7 +71,7 @@ const AdminProjects = () => {
 
   const handleEdit = async () => {
     try {
-      await axios.put(`https://sonicsupportbackend-lbz5o7nqn-ankits-projects-1030ff5d.vercel.app//api/projects/${selectedProjectId}`, editFormData);
+      await axios.put(`https://sonicsupportbackend-uarr.vercel.app/api/projects/${selectedProjectId}`, editFormData);
       alert('Project updated successfully');
       fetchProjects(); // Refresh the project list after update
     } catch (error) {
@@ -252,23 +252,22 @@ const AdminProjects = () => {
           </div>
         </div>
       )}
-      {
-        isUploadsuccess && (
-          <div className="modal-backdrop">
-            <dialog className="modal-custom" style={{ position: 'relative' }} open>
-              <div className="d-flex justify-content-center mt-5">
-                <img src={successImg} className='warning-img' alt="" />
-              </div>
-              <div className='para-less-mp'>
-                <p className='fw-bold text-center lead'>Thanks You</p>
-                <p className="text-muted text-center">Your Project Uploaded Successfully</p>
-              </div>
-              <div className="d-flex justify-content-center">
-                <button className="button w-25 mt-2" onClick={() => setIsUploadsuccess(false)}>Close</button>
-              </div>
-            </dialog>
-          </div>
-        )}
+      {isUploadsuccess && (
+        <div className="modal-backdrop">
+          <dialog className="modal-custom" style={{ position: 'relative' }} open>
+            <div className="d-flex justify-content-center mt-5">
+              <img src={successImg} className='warning-img' alt="" />
+            </div>
+            <div className='para-less-mp'>
+              <p className='fw-bold text-center lead'>Thanks You</p>
+              <p className="text-muted text-center">Your Project Uploaded Successfully</p>
+            </div>
+            <div className="d-flex justify-content-center">
+              <button className="button w-25 mt-2" onClick={() => setIsUploadsuccess(false)}>Close</button>
+            </div>
+          </dialog>
+        </div>
+      )}
       {isUploadFailed && (
         <div className="modal-backdrop">
           <dialog className="modal-custom" style={{ position: 'relative' }} open>
@@ -325,7 +324,7 @@ export default AdminProjects;
 
 //     if (projectName && projectLink && description) {
 //       try {
-//         await axios.post('https://sonicsupportbackend-lbz5o7nqn-ankits-projects-1030ff5d.vercel.app//api/projects', formData);
+//         await axios.post('https://sonicsupportbackend-uarr.vercel.app/api/projects', formData);
 //         setFormData({ projectName: '', projectLink: '', description: '' });
 //         fetchProjects();
 //         setIsUploadsuccess(true);
@@ -340,7 +339,7 @@ export default AdminProjects;
 
 //   const fetchProjects = async () => {
 //     try {
-//       const response = await axios.get('https://sonicsupportbackend-lbz5o7nqn-ankits-projects-1030ff5d.vercel.app//api/projects');
+//       const response = await axios.get('https://sonicsupportbackend-uarr.vercel.app/api/projects');
 //       setProjects(response.data);
 //     } catch (error) {
 //       console.error('Error fetching projects:', error.response);
@@ -349,7 +348,7 @@ export default AdminProjects;
 
 //   const handleDelete = async (projectId) => {
 //     try {
-//       await axios.delete(`https://sonicsupportbackend-lbz5o7nqn-ankits-projects-1030ff5d.vercel.app//api/projects/${projectId}`);
+//       await axios.delete(`https://sonicsupportbackend-uarr.vercel.app/api/projects/${projectId}`);
 //       alert('Project deleted successfully');
 //       fetchProjects(); // Refresh the project list after deletion
 //     } catch (error) {
@@ -366,7 +365,7 @@ export default AdminProjects;
 
 //   const handleEdit = async () => {
 //     try {
-//       await axios.put(`https://sonicsupportbackend-lbz5o7nqn-ankits-projects-1030ff5d.vercel.app//api/projects/${selectedProjectId}`, editFormData);
+//       await axios.put(`https://sonicsupportbackend-uarr.vercel.app/api/projects/${selectedProjectId}`, editFormData);
 //       alert('Project updated successfully');
 //       fetchProjects(); // Refresh the project list after update
 //     } catch (error) {

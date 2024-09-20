@@ -12,29 +12,40 @@ const UserBot = () => {
   const [isChatStarted, setIsChatStarted] = useState(false);
 
   useEffect(() => {
-    // Listen for admin's reply to the user
-    socket.on('userReceiveMessage', (message) => {
-      setMessages((prevMessages) => [...prevMessages, { user: 'Admin', text: message }]);
-    });
+    // Only run this effect after chat is started and a name is provided
+    if (isChatStarted && name) {
+      // Load stored messages from local storage
+      const storedMessages = JSON.parse(localStorage.getItem(name)) || [];
+      setMessages(storedMessages);
 
-    // Cleanup socket when component unmounts
+      // Listen for admin's reply to the user
+      socket.on('userReceiveMessage', (adminMessage) => {
+        const updatedMessages = [...storedMessages, { user: 'Admin', text: adminMessage }];
+        setMessages(updatedMessages);
+        localStorage.setItem(name, JSON.stringify(updatedMessages)); // Store in local storage
+      });
+    }
+
+    // Cleanup function to avoid memory leaks
     return () => {
       socket.off('userReceiveMessage');
     };
-  }, []);
+  }, [isChatStarted, name]); // Only run effect when chat starts and name is set
 
   const startChat = () => {
     if (name.trim()) {
-      socket.emit('join', name);
+      socket.emit('userConnected', name); // Send the user's name to the server
       setIsChatStarted(true);
     }
   };
 
   const sendMessage = () => {
-    if (message.trim()) {
-      socket.emit('userMessage', message);
-      setMessages((prevMessages) => [...prevMessages, { user: name, text: message }]);
-      setMessage('');
+    if (message.trim() && isChatStarted) {
+      const updatedMessages = [...messages, { user: name, text: message }];
+      socket.emit('userMessage', { userName: name, text: message });
+      setMessages(updatedMessages);
+      setMessage(''); // Clear the input field
+      localStorage.setItem(name, JSON.stringify(updatedMessages)); // Store in local storage
     }
   };
 
@@ -42,7 +53,7 @@ const UserBot = () => {
     <div>
       {!isChatStarted ? (
         <div>
-          <h2>Enter Your Name</h2>
+          <h2>Enter Your Name to Start Chat</h2>
           <input
             type="text"
             value={name}
@@ -53,7 +64,7 @@ const UserBot = () => {
         </div>
       ) : (
         <div>
-          <h2>Chat as {name}</h2>
+          <h2>User Chat</h2>
           <div style={{ border: '1px solid #ccc', padding: '10px', marginBottom: '10px', height: '200px', overflowY: 'scroll' }}>
             {messages.map((msg, index) => (
               <p key={index}><strong>{msg.user}:</strong> {msg.text}</p>

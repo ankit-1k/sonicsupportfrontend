@@ -15,6 +15,8 @@ import AdminNews from './Admin/AdminNews/AdminNews';
 import AdminProjects from './Admin/AdminProjects/AdminProjects'
 import AdminContacts from './Admin/AdminContacts/AdminContacts'
 import AdminAboutus from './Admin/AdminAboutus/AdminAboutus'
+import UserBot from './components/UserBot/UserBot';
+import AdminBot from './Admin/Adminbot/AdminBot';
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
@@ -37,6 +39,8 @@ const App = () => {
             <Route path="/contact" element={<Contact />} />
             <Route path="/aboutus" element={<Aboutus />} />
             <Route path="/notes" element={<Notes />} />
+            <Route path="/userbot" element={<UserBot />} />
+            <Route path="/adminbot" element={<AdminBot />} />
             <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
             <Route path="/admin" element={isAuthenticated ? <Admin /> : <Navigate to="/login" />} />
             <Route path="/editnotes" element={isAuthenticated ? <AdminNotes /> : <Navigate to="/login" />} />

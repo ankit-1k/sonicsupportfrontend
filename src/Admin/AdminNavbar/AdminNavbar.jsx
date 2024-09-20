@@ -98,28 +98,28 @@ export default AdminNavbar
 const MobileMenu = () => {
     const navigate = useNavigate()
     const handleNews = () => {
-        navigate('/news')
+        navigate('/editnews')
         window.scrollTo({
             top: window.innerHeight,
             behavior: 'smooth'
         });
     }
     const handleProject = () => {
-        navigate('/projects')
+        navigate('/adminprojects')
         window.scrollTo({
             top: window.innerHeight,
             behavior: 'smooth'
         });
     }
     const handleContact = () => {
-        navigate('/contact')
+        navigate('/admincontacts')
         window.scrollTo({
             top: window.innerHeight,
             behavior: 'smooth'
         });
     }
     const handleAbout = () => {
-        navigate('/aboutus')
+        navigate('/adminaboutus')
         window.scrollTo({
             top: window.innerHeight,
             behavior: 'smooth'

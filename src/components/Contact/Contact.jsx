@@ -14,20 +14,32 @@ const Contact = () => {
         message: ''
     });
 
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setIsSubmitting(true);
         try {
             const response = await axios.post('https://sonicsupportbackend-uarr.vercel.app/api/contact', formData);
             console.log(response.data);
+            setFormData({
+                name: '',
+                email: '',
+                phone: '',
+                website: '',
+                message: ''
+            });
         } catch (error) {
             console.error(error);
+        } finally {
+            setIsSubmitting(false);
         }
     };
-    
+
     return (
         <div>
             <Navbar />
@@ -92,7 +104,15 @@ const Contact = () => {
                         ></textarea>
                     </fieldset>
                     <fieldset>
-                        <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">Submit</button>
+                        <button
+                            name="submit"
+                            type="submit"
+                            id="contact-submit"
+                            data-submit="...Sending"
+                            disabled={isSubmitting}
+                        >
+                            {isSubmitting ? 'Sending...' : 'Submit'}
+                        </button>
                     </fieldset>
                 </form>
             </div>

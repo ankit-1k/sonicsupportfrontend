@@ -13,11 +13,11 @@ function Footer() {
                         <div className="col-6 col-md-3">
                             <h6>Projects</h6>
                             <ul className="footer-links ">
+                                <li><a href="/">Portfolio</a></li>
                                 <li><a href="/">SonicPortfolios</a></li>
                                 <li><a className='text-muted' href="/">HYDPG</a></li>
                                 <li><a href="/">Fast Typing Test</a></li>
-                                <li><a href="/">SIIM</a></li>
-                                <li><a href="/">Templates</a></li>
+                                <li><a href="/">SIIM</a></li>                                
                             </ul>
                         </div>
                         <div className="col-6 col-md-3">
@@ -34,8 +34,8 @@ function Footer() {
                 <div className="container">
                     <div className="row">
                         <div className="col-md-8 col-sm-6 col-12">
-                            <div className="d-flex">
-                                <p className="copyright-text">Copyright © 2020 All Rights Reserved by</p><a href="/"><span className="txt-footer ms-1 me-1">SonicPortfolios</span></a> developed by ankit
+                            <div className="">
+                                <span className="copyright-text">Copyright © 2024 All Rights Reserved by</span><a href="https://sonicultraport.vercel.app/"><span className="txt-footer ms-1 me-1">SonicDev</span></a> developed by ankit
                             </div>
                         </div>
                         <div className="col-md-4 col-sm-6 col-12">

@@ -1,9 +1,13 @@
-// UserBot.jsx
 import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
 
-const socketURL = window.location.hostname === 'localhost' ? 'http://localhost:3001' : 'https://sonicsupportbackend-uarr.vercel.app';
-const socket = io(socketURL, { transports: ['websocket', 'polling'] });
+const socketURL = window.location.hostname === 'localhost' 
+    ? 'http://localhost:3001' 
+    : 'https://sonicsupportbackend-uarr.vercel.app';
+
+const socket = io(socketURL, {
+    transports: ['websocket', 'polling'],
+});
 
 const UserBot = () => {
     const [name, setName] = useState('');

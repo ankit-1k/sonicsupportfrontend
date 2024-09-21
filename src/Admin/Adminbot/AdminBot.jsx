@@ -1,9 +1,13 @@
-// AdminBot.jsx
 import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
 
-const socketURL = window.location.hostname === 'localhost' ? 'http://localhost:3001' : 'https://sonicsupportbackend-uarr.vercel.app';
-const socket = io(socketURL, { transports: ['websocket', 'polling'] });
+const socketURL = window.location.hostname === 'localhost' 
+    ? 'http://localhost:3001' 
+    : 'https://sonicsupportbackend-uarr.vercel.app';
+
+const socket = io(socketURL, {
+    transports: ['websocket', 'polling'],
+});
 
 const AdminBot = () => {
     const [message, setMessage] = useState('');
@@ -45,12 +49,10 @@ const AdminBot = () => {
     const sendMessage = () => {
         if (message.trim() && selectedUser) {
             socket.emit('adminMessage', { userName: selectedUser, text: message });
-
             setUserMessages((prevMessages) => ({
                 ...prevMessages,
                 [selectedUser]: [...(prevMessages[selectedUser] || []), { sender: 'Admin', text: message }],
             }));
-
             setMessage('');
         }
     };

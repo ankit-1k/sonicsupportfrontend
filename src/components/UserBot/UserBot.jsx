@@ -14,15 +14,11 @@ const UserBot = () => {
 
     useEffect(() => {
         if (isChatStarted && name) {
-            const storedMessages = JSON.parse(localStorage.getItem(name)) || [];
-            setMessages(storedMessages);
-
             socket.on('userReceiveMessage', (adminMessage) => {
-                setMessages((prevMessages) => {
-                    const updatedMessages = [...prevMessages, { user: 'Admin', text: adminMessage }];
-                    localStorage.setItem(name, JSON.stringify(updatedMessages));
-                    return updatedMessages;
-                });
+                setMessages((prevMessages) => [
+                    ...prevMessages,
+                    { user: 'Admin', text: adminMessage },
+                ]);
             });
         }
 
@@ -40,11 +36,12 @@ const UserBot = () => {
 
     const sendMessage = () => {
         if (message.trim() && isChatStarted) {
-            const updatedMessages = [...messages, { user: name, text: message }];
             socket.emit('userMessage', { userName: name, text: message });
-            setMessages(updatedMessages);
+            setMessages((prevMessages) => [
+                ...prevMessages,
+                { user: name, text: message },
+            ]);
             setMessage('');
-            localStorage.setItem(name, JSON.stringify(updatedMessages));
         }
     };
 

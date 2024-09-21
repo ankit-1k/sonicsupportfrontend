@@ -18,14 +18,10 @@ const AdminBot = () => {
         });
 
         socket.on('adminReceiveMessage', ({ userName, text }) => {
-            setUserMessages((prevMessages) => {
-                const updatedMessages = {
-                    ...prevMessages,
-                    [userName]: [...(prevMessages[userName] || []), { user: userName, text }],
-                };
-                localStorage.setItem(`chat_${userName}`, JSON.stringify(updatedMessages[userName]));
-                return updatedMessages;
-            });
+            setUserMessages((prevMessages) => ({
+                ...prevMessages,
+                [userName]: [...(prevMessages[userName] || []), { user: userName, text }],
+            }));
         });
 
         return () => {
@@ -36,23 +32,16 @@ const AdminBot = () => {
 
     const selectUser = (user) => {
         setSelectedUser(user);
-        const storedMessages = JSON.parse(localStorage.getItem(`chat_${user}`)) || [];
-        setUserMessages((prevMessages) => ({
-            ...prevMessages,
-            [user]: storedMessages,
-        }));
     };
 
     const sendMessage = () => {
         if (message.trim() && selectedUser) {
-            const updatedMessages = [...(userMessages[selectedUser] || []), { user: 'Admin', text: message }];
             socket.emit('adminMessage', { userName: selectedUser, text: message });
             setUserMessages((prevMessages) => ({
                 ...prevMessages,
-                [selectedUser]: updatedMessages,
+                [selectedUser]: [...(prevMessages[selectedUser] || []), { user: 'Admin', text: message }],
             }));
             setMessage('');
-            localStorage.setItem(`chat_${selectedUser}`, JSON.stringify(updatedMessages));
         }
     };
 

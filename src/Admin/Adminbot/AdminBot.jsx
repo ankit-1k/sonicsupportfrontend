@@ -20,7 +20,7 @@ const AdminBot = () => {
         socket.on('adminReceiveMessage', ({ userName, text }) => {
             setUserMessages((prevMessages) => ({
                 ...prevMessages,
-                [userName]: [...(prevMessages[userName] || []), { user: userName, text }],
+                [userName]: [...(prevMessages[userName] || []), { sender: userName, text }],
             }));
         });
 
@@ -39,7 +39,7 @@ const AdminBot = () => {
             socket.emit('adminMessage', { userName: selectedUser, text: message });
             setUserMessages((prevMessages) => ({
                 ...prevMessages,
-                [selectedUser]: [...(prevMessages[selectedUser] || []), { user: 'Admin', text: message }],
+                [selectedUser]: [...(prevMessages[selectedUser] || []), { sender: 'Admin', text: message }],
             }));
             setMessage('');
         }
@@ -63,15 +63,18 @@ const AdminBot = () => {
                 <div>
                     <h3>Chat with {selectedUser}</h3>
                     <div style={{ border: '1px solid #ccc', padding: '10px', marginBottom: '10px', height: '200px', overflowY: 'scroll' }}>
-                        {(userMessages[selectedUser] || []).map((msg, index) => (
-                            <p key={index}><strong>{msg.user}:</strong> {msg.text}</p>
-                        ))}
+                        {userMessages[selectedUser] &&
+                            userMessages[selectedUser].map((msg, index) => (
+                                <p key={index}>
+                                    <strong>{msg.sender}:</strong> {msg.text}
+                                </p>
+                            ))}
                     </div>
                     <input
                         type="text"
                         value={message}
                         onChange={(e) => setMessage(e.target.value)}
-                        placeholder="Type a reply"
+                        placeholder="Type a message"
                     />
                     <button onClick={sendMessage}>Send</button>
                 </div>

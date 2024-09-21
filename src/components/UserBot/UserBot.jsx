@@ -14,6 +14,10 @@ const UserBot = () => {
 
     useEffect(() => {
         if (isChatStarted && name) {
+            socket.on('loadMessages', (storedMessages) => {
+                setMessages(storedMessages);
+            });
+
             socket.on('userReceiveMessage', (adminMessage) => {
                 setMessages((prevMessages) => [
                     ...prevMessages,
@@ -23,6 +27,7 @@ const UserBot = () => {
         }
 
         return () => {
+            socket.off('loadMessages');
             socket.off('userReceiveMessage');
         };
     }, [isChatStarted, name]);
@@ -63,7 +68,7 @@ const UserBot = () => {
                     <h2>User Chat</h2>
                     <div style={{ border: '1px solid #ccc', padding: '10px', marginBottom: '10px', height: '200px', overflowY: 'scroll' }}>
                         {messages.map((msg, index) => (
-                            <p key={index}><strong>{msg.user}:</strong> {msg.text}</p>
+                            <p key={index}><strong>{msg.sender}:</strong> {msg.text}</p>
                         ))}
                     </div>
                     <input

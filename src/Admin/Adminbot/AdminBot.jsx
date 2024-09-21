@@ -1,98 +1,52 @@
 import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
 
-const socketURL = window.location.hostname === 'localhost' 
-    ? 'http://localhost:3001' 
-    : 'https://sonicsupportbackend-uarr.vercel.app';
-
-const socket = io(socketURL, {
-    transports: ['websocket', 'polling'],
+const socket = io('http://localhost:3001', {
+  transports: ['websocket', 'polling'],
 });
 
 const AdminBot = () => {
-    const [message, setMessage] = useState('');
-    const [userMessages, setUserMessages] = useState({});
-    const [users, setUsers] = useState([]);
-    const [selectedUser, setSelectedUser] = useState(null);
+  const [message, setMessage] = useState('');
+  const [messages, setMessages] = useState([]);
 
-    useEffect(() => {
-        socket.on('userListUpdate', (userList) => {
-            setUsers(userList);
-        });
+  useEffect(() => {
+    // Listen for user messages
+    socket.on('adminReceiveMessage', (message) => {
+      setMessages((prevMessages) => [...prevMessages, { user: 'User', text: message }]);
+    });
 
-        socket.on('adminReceiveMessage', ({ userName, text }) => {
-            setUserMessages((prevMessages) => ({
-                ...prevMessages,
-                [userName]: [...(prevMessages[userName] || []), { sender: userName, text }],
-            }));
-        });
-
-        socket.on('loadUserMessages', ({ userName, messages }) => {
-            setUserMessages((prevMessages) => ({
-                ...prevMessages,
-                [userName]: messages,
-            }));
-        });
-
-        return () => {
-            socket.off('adminReceiveMessage');
-            socket.off('userListUpdate');
-            socket.off('loadUserMessages');
-        };
-    }, []);
-
-    const selectUser = (user) => {
-        setSelectedUser(user);
-        socket.emit('adminSelectUser', user);
+    // Cleanup socket when component unmounts
+    return () => {
+      socket.off('adminReceiveMessage');
     };
+  }, []);
 
-    const sendMessage = () => {
-        if (message.trim() && selectedUser) {
-            socket.emit('adminMessage', { userName: selectedUser, text: message });
-            setUserMessages((prevMessages) => ({
-                ...prevMessages,
-                [selectedUser]: [...(prevMessages[selectedUser] || []), { sender: 'Admin', text: message }],
-            }));
-            setMessage('');
-        }
-    };
+  const sendMessage = () => {
+    // Send admin's reply to the server
+    if (message.trim()) {
+      socket.emit('adminMessage', message);
+      setMessages((prevMessages) => [...prevMessages, { user: 'Bot', text: message }]);
+      setMessage(''); // Clear the input field
+    }
+  };
 
-    return (
-        <div>
-            <h2>Admin Panel</h2>
-            <div>
-                <h3>Users</h3>
-                <ul>
-                    {users.map((user, index) => (
-                        <li key={index} onClick={() => selectUser(user)} style={{ cursor: 'pointer' }}>
-                            {user}
-                        </li>
-                    ))}
-                </ul>
-            </div>
-
-            {selectedUser && (
-                <div>
-                    <h3>Chat with {selectedUser}</h3>
-                    <div style={{ border: '1px solid #ccc', padding: '10px', marginBottom: '10px', height: '200px', overflowY: 'scroll' }}>
-                        {userMessages[selectedUser] &&
-                            userMessages[selectedUser].map((msg, index) => (
-                                <p key={index}>
-                                    <strong>{msg.sender}:</strong> {msg.text}
-                                </p>
-                            ))}
-                    </div>
-                    <input
-                        type="text"
-                        value={message}
-                        onChange={(e) => setMessage(e.target.value)}
-                        placeholder="Type a message"
-                    />
-                    <button onClick={sendMessage}>Send</button>
-                </div>
-            )}
-        </div>
-    );
+  return (
+    <div>
+      <h2>Admin Chat</h2>
+      <div style={{ border: '1px solid #ccc', padding: '10px', marginBottom: '10px', height: '200px', overflowY: 'scroll' }}>
+        {messages.map((msg, index) => (
+          <p key={index}><strong>{msg.user}:</strong> {msg.text}</p>
+        ))}
+      </div>
+      <input
+        type="text"
+        value={message}
+        onChange={(e) => setMessage(e.target.value)}
+        placeholder="Type a reply"
+      />
+      <button onClick={sendMessage}>Send</button>
+    </div>
+  );
 };
 
 export default AdminBot;

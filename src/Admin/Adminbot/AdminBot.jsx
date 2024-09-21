@@ -13,10 +13,12 @@ const AdminBot = () => {
     const [selectedUser, setSelectedUser] = useState(null);
 
     useEffect(() => {
+        // Update the list of users when a new user connects
         socket.on('userListUpdate', (userList) => {
             setUsers(userList);
         });
 
+        // Listen for new messages from users
         socket.on('adminReceiveMessage', ({ userName, text }) => {
             setUserMessages((prevMessages) => ({
                 ...prevMessages,
@@ -24,23 +26,38 @@ const AdminBot = () => {
             }));
         });
 
+        // Listen for loaded messages from the server for the selected user
+        socket.on('loadUserMessages', ({ userName, messages }) => {
+            setUserMessages((prevMessages) => ({
+                ...prevMessages,
+                [userName]: messages,
+            }));
+        });
+
         return () => {
             socket.off('adminReceiveMessage');
             socket.off('userListUpdate');
+            socket.off('loadUserMessages');
         };
     }, []);
 
     const selectUser = (user) => {
         setSelectedUser(user);
+        // Request the message history from the server when a user is selected
+        socket.emit('adminSelectUser', user);
     };
 
     const sendMessage = () => {
         if (message.trim() && selectedUser) {
+            // Send message to server
             socket.emit('adminMessage', { userName: selectedUser, text: message });
+
+            // Update local state with the new message
             setUserMessages((prevMessages) => ({
                 ...prevMessages,
                 [selectedUser]: [...(prevMessages[selectedUser] || []), { sender: 'Admin', text: message }],
             }));
+
             setMessage('');
         }
     };

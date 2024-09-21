@@ -7,47 +7,51 @@ const socket = io('http://localhost:3001', {
 
 const AdminBot = () => {
   const [message, setMessage] = useState('');
-  const [messages, setMessages] = useState([]);
+  const [userMessages, setUserMessages] = useState({}); // Store messages for all users
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
 
   useEffect(() => {
-    // Listen for user list updates
     socket.on('userListUpdate', (userList) => {
       setUsers(userList);
     });
 
-    // Listen for user messages
     socket.on('adminReceiveMessage', ({ userName, text }) => {
-      if (userName === selectedUser) {
-        const updatedMessages = [...messages, { user: userName, text }];
-        setMessages(updatedMessages);
-        localStorage.setItem(`chat_${userName}`, JSON.stringify(updatedMessages)); // Store in local storage
-      }
+      setUserMessages((prevMessages) => {
+        const updatedMessages = {
+          ...prevMessages,
+          [userName]: [...(prevMessages[userName] || []), { user: userName, text }],
+        };
+        localStorage.setItem(`chat_${userName}`, JSON.stringify(updatedMessages[userName]));
+        return updatedMessages;
+      });
     });
 
-    // Cleanup socket when component unmounts
     return () => {
       socket.off('adminReceiveMessage');
       socket.off('userListUpdate');
     };
-  }, [selectedUser, messages]);
+  }, []);
 
   const selectUser = (user) => {
     setSelectedUser(user);
-
-    // Retrieve messages from local storage
     const storedMessages = JSON.parse(localStorage.getItem(`chat_${user}`)) || [];
-    setMessages(storedMessages);
+    setUserMessages((prevMessages) => ({
+      ...prevMessages,
+      [user]: storedMessages,
+    }));
   };
 
   const sendMessage = () => {
     if (message.trim() && selectedUser) {
-      const updatedMessages = [...messages, { user: 'Admin', text: message }];
+      const updatedMessages = [...(userMessages[selectedUser] || []), { user: 'Admin', text: message }];
       socket.emit('adminMessage', { userName: selectedUser, text: message });
-      setMessages(updatedMessages);
-      setMessage(''); // Clear the input field
-      localStorage.setItem(`chat_${selectedUser}`, JSON.stringify(updatedMessages)); // Store in local storage
+      setUserMessages((prevMessages) => ({
+        ...prevMessages,
+        [selectedUser]: updatedMessages,
+      }));
+      setMessage('');
+      localStorage.setItem(`chat_${selectedUser}`, JSON.stringify(updatedMessages));
     }
   };
 
@@ -69,7 +73,7 @@ const AdminBot = () => {
         <div>
           <h3>Chat with {selectedUser}</h3>
           <div style={{ border: '1px solid #ccc', padding: '10px', marginBottom: '10px', height: '200px', overflowY: 'scroll' }}>
-            {messages.map((msg, index) => (
+            {(userMessages[selectedUser] || []).map((msg, index) => (
               <p key={index}><strong>{msg.user}:</strong> {msg.text}</p>
             ))}
           </div>

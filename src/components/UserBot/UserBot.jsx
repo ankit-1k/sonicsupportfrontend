@@ -12,29 +12,27 @@ const UserBot = () => {
   const [isChatStarted, setIsChatStarted] = useState(false);
 
   useEffect(() => {
-    // Only run this effect after chat is started and a name is provided
     if (isChatStarted && name) {
-      // Load stored messages from local storage
       const storedMessages = JSON.parse(localStorage.getItem(name)) || [];
-      setMessages(storedMessages);
+      setMessages(storedMessages);  // Load stored messages once
 
-      // Listen for admin's reply to the user
       socket.on('userReceiveMessage', (adminMessage) => {
-        const updatedMessages = [...storedMessages, { user: 'Admin', text: adminMessage }];
-        setMessages(updatedMessages);
-        localStorage.setItem(name, JSON.stringify(updatedMessages)); // Store in local storage
+        setMessages((prevMessages) => {
+          const updatedMessages = [...prevMessages, { user: 'Admin', text: adminMessage }];
+          localStorage.setItem(name, JSON.stringify(updatedMessages));
+          return updatedMessages;  // Update messages in a function to avoid dependency on messages
+        });
       });
     }
 
-    // Cleanup function to avoid memory leaks
     return () => {
       socket.off('userReceiveMessage');
     };
-  }, [isChatStarted, name]); // Only run effect when chat starts and name is set
+  }, [isChatStarted, name]);  // Remove messages from dependency array
 
   const startChat = () => {
     if (name.trim()) {
-      socket.emit('userConnected', name); // Send the user's name to the server
+      socket.emit('userConnected', name);
       setIsChatStarted(true);
     }
   };
@@ -44,8 +42,8 @@ const UserBot = () => {
       const updatedMessages = [...messages, { user: name, text: message }];
       socket.emit('userMessage', { userName: name, text: message });
       setMessages(updatedMessages);
-      setMessage(''); // Clear the input field
-      localStorage.setItem(name, JSON.stringify(updatedMessages)); // Store in local storage
+      setMessage('');
+      localStorage.setItem(name, JSON.stringify(updatedMessages));
     }
   };
 

@@ -1,8 +1,8 @@
-// UserBot.jsx
 import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
 
-const socket = io('http://localhost:3001', {
+// Connect to your backend URL
+const socket = io('https://sonicsupportbackend-uarr.vercel.app', {
     transports: ['websocket', 'polling'],
 });
 
@@ -21,7 +21,7 @@ const UserBot = () => {
             socket.on('userReceiveMessage', (adminMessage) => {
                 setMessages((prevMessages) => [
                     ...prevMessages,
-                    { user: 'Admin', text: adminMessage },
+                    { sender: 'Admin', text: adminMessage },
                 ]);
             });
         }
@@ -44,7 +44,7 @@ const UserBot = () => {
             socket.emit('userMessage', { userName: name, text: message });
             setMessages((prevMessages) => [
                 ...prevMessages,
-                { user: name, text: message },
+                { sender: name, text: message },
             ]);
             setMessage('');
         }
